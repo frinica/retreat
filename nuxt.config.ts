@@ -1,4 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true }
+  modules: [],
+  devtools: { enabled: true },
+  runtimeConfig: {
+    MDB_URI: process.env.MDB_URI,
+  },
+  nitro: {
+    plugins: ["~/server/index.ts"],
+  },
 })
