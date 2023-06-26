@@ -1,13 +1,11 @@
 <script setup lang="ts">
-const { signIn } = useAuth()
-
-const logIn = async (type: string) => {
-  signIn(type, { callbackUrl: "http://localhost:3000" })
-}
+const login = ref(true)
 </script>
 
 <template>
-  <div>
-    <button @click="logIn('Credentials')">SIGN IN</button>
+  <div v-if="login">
+    <LoginForm />
+    <p>New to Retreat? Sign up <a @click="login = false">here.</a></p>
   </div>
+  <div v-else><SignupForm /></div>
 </template>

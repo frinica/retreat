@@ -7,6 +7,7 @@ const config = useRuntimeConfig()
 
 export default NuxtAuthHandler({
   secret: config.AUTH_SECRET,
+  pages: { signIn: "/login" },
   providers: [
     //@ts-expect-error
     CredentialsProvider.default({
@@ -16,6 +17,7 @@ export default NuxtAuthHandler({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials: any) {
+        console.log("Credentials: ", credentials)
         const { email, password } = credentials
         if (!email || !password) {
           return {
@@ -32,18 +34,22 @@ export default NuxtAuthHandler({
             const isPasswordValid = userData.password === password
 
             if (isPasswordValid) {
-              return {
+              console.log("Password valid")
+              /* return {
                 id: userData._id,
                 name: userData.name,
                 email: userData.email,
-              }
+              } */
+              return userData
             } else {
+              console.log("Password not valid")
               return {
                 code: "USER_NOT_FOUND",
                 message: "The user doesn't exist",
               }
             }
           } else {
+            console.log("User not found")
             return {
               code: "USER_NOT_FOUND",
               message: "The user doesn't exist",
