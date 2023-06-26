@@ -10,10 +10,12 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxt/typescript-build": "^3.0.1",
     "@sidebase/nuxt-auth": "0.6.0-beta.3",
     "@types/node": "^18",
     "mongoose": "^7.3.0",
     "next-auth": "^4.21.1",
-    "nuxt": "^3.5.2"
+    "nuxt": "^3.5.2",
+    "typescript": "^5.1.3"
   }
 }
