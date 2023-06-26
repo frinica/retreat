@@ -7,7 +7,6 @@ interface ReqBody {
 
 export default defineEventHandler(async (event) => {
   const { email, password } = await readBody<ReqBody>(event)
-
   if (!email) {
     return {
       code: "EMAIL_REQUIRED",
@@ -33,6 +32,7 @@ export default defineEventHandler(async (event) => {
         return {
           id: userData._id,
           name: userData.name,
+          email: userData.email,
         }
       } else {
         console.log("Password is not valid.")
