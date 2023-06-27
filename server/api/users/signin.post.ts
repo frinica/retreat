@@ -1,5 +1,7 @@
 import { users } from "../../dbModels"
-import generatePasswordHash from "../../utils/passwordHash"
+import { passwordHash } from "../../utils/passwordHash"
+
+const hash = passwordHash()
 
 interface ReqBody {
   email: string
@@ -27,8 +29,8 @@ export default defineEventHandler(async (event) => {
       email: email.toLowerCase(),
     })
     if (userData) {
-      const hashedPassword = await generatePasswordHash(password)
-      const isPasswordValid = userData.password === hashedPassword
+      const savedHash = userData.password || ""
+      const isPasswordValid = await hash.comparePassword(password, savedHash)
 
       if (isPasswordValid) {
         //Create session here
