@@ -2,11 +2,6 @@
 const { signIn } = useAuth()
 const email = ref("")
 const password = ref("")
-
-const logIn = async (type: string) => {
-  console.log(type)
-  signIn(type)
-}
 </script>
 
 <template>
