@@ -33,10 +33,12 @@ export default defineEventHandler(async (event) => {
       const isPasswordValid = await hash.comparePassword(password, savedHash)
 
       if (isPasswordValid) {
-        //Create session here
+        // TODO: Create session
         return {
           id: userData._id,
           name: userData.name,
+          email: userData.email,
+          role: userData.role,
         }
       } else {
         console.log("Password is not valid.")

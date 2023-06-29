@@ -27,11 +27,14 @@ export default defineEventHandler(async (event) => {
         email,
         password: hashedPassword,
         name,
+        role: "user",
       })
 
       return {
         id: newUserData._id,
         name: newUserData.name,
+        email: newUserData.email,
+        role: newUserData.role,
       }
     }
   } catch (error) {
