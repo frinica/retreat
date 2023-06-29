@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { storeToRefs } from "pinia"
-import { useAuthStore } from "store/auth"
+import { useAuthStore } from "~/store/auth"
 
 const { authenticateUser } = useAuthStore()
 const { authenticated } = storeToRefs(useAuthStore()) // make authenticated state reactive with storeToRefs

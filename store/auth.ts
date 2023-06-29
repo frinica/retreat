@@ -12,7 +12,7 @@ export const useAuthStore = defineStore("auth", {
   }),
   actions: {
     async authenticateUser({ email, password }: UserPayload) {
-      const { data, pending }: any = await useFetch("/api/users", {
+      const { data, pending }: any = await useFetch("/api/users/signin", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: { email, password },
