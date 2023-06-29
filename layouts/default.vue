@@ -1,3 +1,18 @@
+<script lang="ts" setup>
+import { storeToRefs } from "pinia"
+import { useAuthStore } from "~/store/auth"
+
+const router = useRouter()
+
+const { logoutUser } = useAuthStore()
+const { authenticated } = storeToRefs(useAuthStore())
+
+const logout = () => {
+  logoutUser()
+  router.push("/login")
+}
+</script>
+
 <template>
   <div>
     <header>
@@ -6,7 +21,10 @@
         <li>
           <nuxt-link to="/profile">Profile</nuxt-link>
         </li>
-        <li><nuxt-link to="/login">Login</nuxt-link></li>
+        <li v-if="!authenticated"><nuxt-link to="/login">Login</nuxt-link></li>
+        <li v-if="authenticated">
+          <nuxt-link @click="logout">Logout</nuxt-link>
+        </li>
       </ul>
     </header>
     <main>
