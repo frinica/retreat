@@ -1,4 +1,7 @@
 import { users } from "../../dbModels"
+import { passwordHash } from "../../utils/passwordHash"
+
+const hash = passwordHash()
 
 interface ReqBody {
   email: string
@@ -14,22 +17,24 @@ export default defineEventHandler(async (event) => {
       email,
     })
     if (userData) {
-      console.log(`User with email ${email} already exists`)
       return {
         code: "USER_EXISTS",
         message: "User with the given email already exists.",
       }
     } else {
-      console.log("Create user")
+      const hashedPassword = await hash.hashPassword(password)
       const newUserData = await users.create({
         email,
-        password,
+        password: hashedPassword,
         name,
+        role: "user",
       })
 
       return {
         id: newUserData._id,
         name: newUserData.name,
+        email: newUserData.email,
+        role: newUserData.role,
       }
     }
   } catch (error) {
