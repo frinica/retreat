@@ -1,13 +1,22 @@
 <script setup lang="ts">
 import { ref } from "vue"
+import { storeToRefs } from "pinia"
+import { useAuthStore } from "store/auth"
+
+const { authenticateUser } = useAuthStore()
+const { authenticated } = storeToRefs(useAuthStore()) // make authenticated state reactive with storeToRefs
 
 const user = ref({
   email: "",
   password: "",
 })
+const router = useRouter()
 
 const login = async () => {
-  // LOGIN
+  await authenticateUser(user.value)
+  if (authenticated) {
+    router.push("/")
+  }
 }
 </script>
 
