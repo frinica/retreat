@@ -1,22 +1,23 @@
 import { storeToRefs } from "pinia"
 import { useAuthStore } from "~/store/auth"
 
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware((to) => {
   const { authenticated } = storeToRefs(useAuthStore())
   const token = useCookie("token")
 
+  console.log(token.value)
   if (token.value) {
     authenticated.value = true
   }
 
-  // TODO: Fix middleware to redirect user on successfull login
-  console.log("To: ", to, "From: ", from)
-  if (token.value && from?.name === "login") {
+  if (token.value && to?.name === "login") {
+    console.log("Token w value: ", token.value)
     console.log("Redirecting")
     return navigateTo("/")
   }
 
   if (!token.value && to?.name !== "login") {
+    console.log("Token w/o value: ", token.value)
     abortNavigation()
     return navigateTo("/login")
   }
