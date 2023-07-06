@@ -37,11 +37,16 @@ const pauseSound = () => {
     audioPlaying.value = false
   }
 }
+
+const addFavourite = () => {
+  console.log("I like this sound")
+}
 </script>
 
 <template>
   <div v-for="track in audioTracks">
     <button @click="playSound(track.src)">Play sound!</button>
     <button @click="pauseSound">Pause sound!</button>
+    <button @click="addFavourite">Add to favs</button>
   </div>
 </template>
