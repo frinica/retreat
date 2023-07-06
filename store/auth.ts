@@ -5,9 +5,16 @@ interface UserPayload {
   password: string
 }
 
+interface TokenData {
+  id: string
+  name: string
+  email: string
+}
+
 export const useAuthStore = defineStore("auth", {
   state: () => ({
     authenticated: false,
+    token: null as TokenData | null,
     loading: false,
   }),
   actions: {
@@ -23,6 +30,7 @@ export const useAuthStore = defineStore("auth", {
         const token = useCookie("token")
         token.value = data?.value
         this.authenticated = true
+        this.token = token?.value as TokenData | null
       }
     },
     logoutUser() {
@@ -30,5 +38,8 @@ export const useAuthStore = defineStore("auth", {
       this.authenticated = false
       token.value = null
     },
+  },
+  getters: {
+    getToken: (state) => state.token,
   },
 })
