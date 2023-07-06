@@ -32,5 +32,9 @@ export default defineEventHandler(async (event) => {
     }
   } catch (error) {
     console.dir(error)
+    return {
+      code: "ERROR",
+      message: "Something went wrong",
+    }
   }
 })
