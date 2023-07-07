@@ -3,15 +3,16 @@ import { lists } from "../../dbModels"
 interface ReqBody {
   uid: string
   sound_id: string
+  sound_type: string
 }
 
 export default defineEventHandler(async (event) => {
-  const { uid, sound_id } = await readBody<ReqBody>(event)
+  const { uid, sound_id, sound_type } = await readBody<ReqBody>(event)
 
   try {
     const data = await lists.findOne({
       uid,
-      sound_id: sound_id,
+      sound_id,
     })
     if (data) {
       return {
@@ -21,13 +22,15 @@ export default defineEventHandler(async (event) => {
     } else {
       const newListEntry = await lists.create({
         uid,
-        sound_id: sound_id,
+        sound_id,
+        sound_type,
       })
 
       return {
         id: newListEntry._id,
         uid: newListEntry.uid,
         sound_id: newListEntry.sound_id,
+        sound_type: newListEntry.sound_type,
       }
     }
   } catch (error) {
