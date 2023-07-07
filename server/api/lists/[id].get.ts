@@ -9,16 +9,12 @@ interface List {
 export default defineEventHandler(async (event) => {
   //@ts-ignore
   const uid = event.context.params.id
-
   try {
     const listEntries = await lists.find({
       uid: uid,
     })
     if (listEntries) {
-      return {
-        // Returns an array of list entries belonging to the user id
-        listEntries,
-      }
+      return listEntries
     } else {
       return {
         code: "LIST_ENTRIES_NOT_FOUND",
