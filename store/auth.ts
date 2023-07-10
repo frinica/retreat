@@ -12,11 +12,14 @@ interface TokenData {
 }
 
 export const useAuthStore = defineStore("auth", {
-  state: () => ({
-    authenticated: false,
-    token: null as TokenData | null,
-    loading: false,
-  }),
+  state: () => {
+    return {
+      authenticated: false,
+      token: null as TokenData | null,
+      loading: false,
+    }
+  },
+  persist: true,
   actions: {
     async authenticateUser({ email, password }: UserPayload) {
       const { data, pending }: any = await useFetch("/api/users/signin", {

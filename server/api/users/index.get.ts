@@ -2,7 +2,6 @@ import { users } from "../../dbModels"
 
 export default defineEventHandler(async (event) => {
   try {
-    console.log("Find users")
     const usersData = await users.find()
     return usersData.map((user) => ({
       id: user._id,

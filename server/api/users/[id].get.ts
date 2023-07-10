@@ -5,7 +5,6 @@ export default defineEventHandler(async (event) => {
   const userId = event.context.params.id
 
   try {
-    console.log("Find user")
     const userData = await users.findOne({
       _id: userId,
     })
