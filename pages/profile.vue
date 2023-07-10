@@ -1,23 +1,38 @@
 <script lang="ts" setup>
 import { useAuthStore } from "../store/auth"
 
-const store = useAuthStore()
-const token = store.getToken
-const audioTracks = useAudioTracks()
+interface FavTrack {
+  _id: String
+  uid: String
+  sound_id: String
+  sound_type: String
+}
 
+interface Track {
+  type: string
+  id: string
+  src: string
+}
+
+const store = useAuthStore()
+//const token = store.getToken
+const token = store.$state.token
+const audioTracks = useAudioTracks()
 const audioPlaying = ref(false)
 const audio: any = ref(null)
 
+// Get the users saved audio tracks
 const listEntries = await useFetch(`/api/lists/${token?.id}`, {
   method: "get",
   headers: { "Content-Type": "application/json" },
 })
 
-const getAudioTrack = (savedTrack: any) => {
-  return audioTracks.find((t: any) => t.id === savedTrack.sound_id)
+// Get audio tracks from composables
+const getAudioTrack = (savedTrack: FavTrack) => {
+  return audioTracks.find((t: Track) => t.id === savedTrack.sound_id)
 }
 
-const playSound = (track: any) => {
+const playSound = (track: Track) => {
   if (!audioPlaying.value) {
     audio.value = new Audio(track.src)
     audio.value.play()
@@ -32,8 +47,20 @@ const pauseSound = () => {
   }
 }
 
-const deleteFav = (track: any) => {
-  console.log(`delete ${track._id}`)
+const deleteFav = async (track: FavTrack) => {
+  const { uid, sound_id } = track
+  const res = await useFetch("/api/lists", {
+    method: "delete",
+    headers: { "Content-Type": "application/json" },
+    body: {
+      uid,
+      sound_id,
+    },
+  })
+
+  if (res.data) {
+    location.reload()
+  }
 }
 </script>
 
