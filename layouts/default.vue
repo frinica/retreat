@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="bg-gray">
     <Navbar />
-    <main>
+    <main class="h-screen font-sans">
       <slot />
     </main>
-    <footer>
+    <!-- <footer>
       <h3>Footer</h3>
-    </footer>
+    </footer> -->
   </div>
 </template>

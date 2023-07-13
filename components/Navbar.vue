@@ -15,7 +15,10 @@ const logout = () => {
 
 <template>
   <header>
-    <ul>
+    <ul
+      v-if="authenticated"
+      class="flex justify-center gap-x-5 bg-green text-white p-5"
+    >
       <li><nuxt-link to="/">Home</nuxt-link></li>
       <li>
         <nuxt-link to="/profile">Profile</nuxt-link>

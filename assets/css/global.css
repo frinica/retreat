@@ -1,0 +1,15 @@
+@font-face {
+  font-display: swap;
+  font-family: "Lobster";
+  src: url("../fonts/Lobster-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "RedHatDisplay";
+  src: url("../fonts/RedHatDisplay-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
