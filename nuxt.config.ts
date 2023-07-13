@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   modules: ["@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt"],
   devtools: { enabled: true },
+  css: ["~/assets/css/main.css"],
   runtimeConfig: {
     MDB_URI: process.env.MDB_URI,
   },
