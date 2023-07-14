@@ -14,12 +14,15 @@ const audioTracks = useAudioTracks()
 
 const audioPlaying = ref(false)
 const audio: any = ref(null)
+const currentTrack: any = ref(null)
 
-const playSound = (trackId: string) => {
+const playSound = (track: Track) => {
+  const { src, id } = track
   if (!audioPlaying.value) {
-    audio.value = new Audio(trackId)
+    audio.value = new Audio(src)
     audio.value.play()
     audioPlaying.value = true
+    currentTrack.value = id
   }
 }
 
@@ -27,6 +30,7 @@ const pauseSound = () => {
   if (audioPlaying.value) {
     audio.value.pause()
     audioPlaying.value = false
+    currentTrack.value = null
   }
 }
 
@@ -47,9 +51,13 @@ const addFavourite = async (track: Track) => {
 </script>
 
 <template>
-  <div v-for="track in audioTracks">
-    <button @click="playSound(track.src)">Play sound!</button>
-    <button @click="pauseSound">Pause sound!</button>
+  <div v-for="track in audioTracks" class="mb-5 border border-green">
+    <button v-if="currentTrack !== track.id" @click="playSound(track)">
+      Play sound!
+    </button>
+    <button v-if="currentTrack === track.id" @click="pauseSound">
+      Pause sound!
+    </button>
     <button @click="addFavourite(track)">Add to favs</button>
   </div>
 </template>

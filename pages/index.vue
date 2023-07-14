@@ -5,6 +5,7 @@ definePageMeta({
 </script>
 
 <template>
-  <h1>Home Page</h1>
-  <AudioPlayer />
+  <section class="mx-8">
+    <AudioPlayer />
+  </section>
 </template>

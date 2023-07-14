@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray">
     <Navbar />
-    <main class="h-screen font-sans">
+    <main class="h-screen font-sans text-white">
       <slot />
     </main>
     <!-- <footer>
