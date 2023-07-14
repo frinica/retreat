@@ -12,9 +12,9 @@ const store = useAuthStore()
 const token = store.getToken
 const audioTracks = useAudioTracks()
 
-const audioPlaying = ref(false)
-const audio: any = ref(null)
-const currentTrack: any = ref(null)
+const audioPlaying = ref<boolean>(false)
+const audio = ref<HTMLAudioElement | null>(null)
+const currentTrack = ref<string | null>(null)
 
 const playSound = (track: Track) => {
   const { src, id } = track
@@ -27,7 +27,7 @@ const playSound = (track: Track) => {
 }
 
 const pauseSound = () => {
-  if (audioPlaying.value) {
+  if (audioPlaying.value && audio.value) {
     audio.value.pause()
     audioPlaying.value = false
     currentTrack.value = null
@@ -51,13 +51,22 @@ const addFavourite = async (track: Track) => {
 </script>
 
 <template>
-  <div v-for="track in audioTracks" class="mb-5 border border-green">
-    <button v-if="currentTrack !== track.id" @click="playSound(track)">
-      Play sound!
-    </button>
-    <button v-if="currentTrack === track.id" @click="pauseSound">
-      Pause sound!
-    </button>
-    <button @click="addFavourite(track)">Add to favs</button>
+  <div
+    v-for="track in audioTracks"
+    class="mb-5 bg-green-dark py-6 px-3 rounded-lg"
+  >
+    <div class="bg-green bg-opacity-50 flex justify-between p-2 rounded-lg">
+      <button v-if="currentTrack !== track.id" @click="playSound(track)">
+        <PlayButton />
+      </button>
+      <button v-if="currentTrack === track.id" @click="pauseSound">
+        <PauseButton />
+      </button>
+      <h2 class="capitalize flex-1 px-4 self-center">{{ track.id }}</h2>
+      <button @click="addFavourite(track)">
+        <HeartOutline />
+        <!-- <HeartFilled /> -->
+      </button>
+    </div>
   </div>
 </template>
