@@ -22,16 +22,16 @@ const login = async () => {
 
 <template>
   <section class="text-center p-20 bg-hero-pattern bg-cover h-screen">
-    <h1 class="text-6xl mb-16 text-white drop-shadow-lg font-serif">Retreat</h1>
+    <h1 class="text-7xl mb-16 text-white drop-shadow-lg font-serif">Retreat</h1>
 
-    <form @submit.prevent="login" class="text-start">
+    <form @submit.prevent="login" class="flex flex-col">
       <input
         v-model="user.email"
         type="text"
         name="email"
         placeholder="Email"
         required
-        class="border rounded-lg px-2 py-1 mb-4 drop-shadow-lg opacity-80 focus:outline-green"
+        class="border border-green rounded-lg px-2 py-1 mb-4 drop-shadow-lg opacity-80 focus:outline-green md:self-center md:w-[33%]"
       />
       <input
         v-model="user.password"
@@ -39,11 +39,11 @@ const login = async () => {
         name="password"
         placeholder="Password"
         required
-        class="border rounded-lg px-2 py-1 mb-8 drop-shadow-lg opacity-80 focus:outline-green"
+        class="border border-green rounded-lg px-2 py-1 mb-8 drop-shadow-lg opacity-80 focus:outline-green md:self-center md:w-[33%]"
       />
       <div class="text-center">
         <button
-          class="text-white bg-green py-3 px-6 rounded-xl border border-green-light drop-shadow-lg shadow-inner"
+          class="text-white bg-green py-2 px-6 rounded-xl border border-green-light drop-shadow-lg shadow-inner hover:bg-green-dark hover:border-green"
         >
           Sign in
         </button>
