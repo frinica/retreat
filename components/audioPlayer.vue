@@ -94,7 +94,9 @@ const deleteFavourite = async (track: any) => {
       <button v-if="currentTrack === track.id" @click="pauseSound">
         <PauseButton />
       </button>
-      <h2 class="capitalize flex-1 px-4 self-center">{{ track.id }}</h2>
+      <h2 class="capitalize flex-1 px-4 self-center drop-shadow-lg">
+        {{ track.id }}
+      </h2>
 
       <button v-if="!isFavouriteTrack(track)" @click="addFavourite(track)">
         <HeartOutline />
