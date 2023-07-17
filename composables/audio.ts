@@ -14,7 +14,7 @@ export const useAudioTracks = () => {
     { type: "night", id: "nightambience", src: nightambience },
     { type: "ocean", id: "ocean", src: ocean },
     { type: "rain", id: "softrain", src: softrain },
-    { type: "thuder", id: "thunderstorm", src: thunderstorm },
+    { type: "thunder", id: "thunderstorm", src: thunderstorm },
     { type: "tropical", id: "tropical", src: tropical },
     { type: "underwater", id: "underwater", src: underwater },
   ]
