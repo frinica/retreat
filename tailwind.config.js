@@ -45,11 +45,11 @@ module.exports = {
         // Audioplayer type colours
         fire: "#BD4400",
         forest: "#1B3817",
-        night: "#072B56",
+        night: "#062345",
         ocean: "#5287CF",
         rain: "#358192",
         thunder: "#423068",
-        tropical: "#D24B2B",
+        tropical: "#4B7547",
         underwater: "#003E60",
       },
       backgroundImage: {
