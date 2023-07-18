@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue"
 import { storeToRefs } from "pinia"
 import { useAuthStore } from "~/store/auth"
 
@@ -11,6 +10,7 @@ const user = ref({
   password: "",
 })
 const router = useRouter()
+const showRegForm = ref(false)
 
 const login = async () => {
   await authenticateUser(user.value)
@@ -29,7 +29,7 @@ const login = async () => {
         Retreat
       </h1>
 
-      <form @submit.prevent="login" class="flex flex-col">
+      <form v-if="!showRegForm" @submit.prevent="login" class="flex flex-col">
         <input
           v-model="user.email"
           type="text"
@@ -54,6 +54,16 @@ const login = async () => {
           </button>
         </div>
       </form>
+      <p v-if="!showRegForm" class="mt-5">
+        or
+        <button
+          @click="showRegForm = true"
+          class="underline hover:font-semibold"
+        >
+          Sign up
+        </button>
+      </p>
+      <RegisterForm v-if="showRegForm" />
     </div>
   </section>
 </template>
