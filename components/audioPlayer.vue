@@ -87,7 +87,7 @@ const deleteFavourite = async (track: any) => {
 <template>
   <div v-for="track in audioTracks" class="relative">
     <AudioPlayerBg :type="track.type" />
-    <div class="absolute flex justify-between top-10 left-5 min-w-[254px]">
+    <div class="absolute flex justify-between top-10 left-5 min-w-[268px]">
       <button v-if="currentTrack !== track.id" @click="playSound(track)">
         <PlayButton />
       </button>
