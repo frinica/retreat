@@ -17,7 +17,7 @@ const logout = () => {
   <header>
     <ul
       v-if="authenticated"
-      class="flex justify-center gap-x-5 bg-green text-white p-5 mb-10"
+      class="flex justify-center gap-x-5 bg-green text-white p-5 mb-5"
     >
       <li><nuxt-link to="/">Home</nuxt-link></li>
       <li>

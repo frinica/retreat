@@ -16,6 +16,7 @@ const audioPlaying = ref<boolean>(false)
 const audio = ref<HTMLAudioElement | null>(null)
 const currentTrack = ref<string | null>(null)
 
+// Fetch the tracks the user has marked as favourites
 const usersFavedTracks = await useFetch(`/api/lists/${token?.id}`, {
   method: "get",
   headers: { "Content-Type": "application/json" },
@@ -85,7 +86,7 @@ const deleteFavourite = async (track: any) => {
 
 <template>
   <div v-for="track in audioTracks" class="relative">
-    <AudioPlayerBg :type="track.type"> </AudioPlayerBg>
+    <AudioPlayerBg :type="track.type" />
     <div class="absolute flex justify-between top-10 left-5 min-w-[254px]">
       <button v-if="currentTrack !== track.id" @click="playSound(track)">
         <PlayButton />
@@ -101,6 +102,7 @@ const deleteFavourite = async (track: any) => {
       <button v-if="!isFavouriteTrack(track)" @click="addFavourite(track)">
         <HeartOutline />
       </button>
+
       <button v-if="isFavouriteTrack(track)" @click="deleteFavourite(track)">
         <HeartFilled />
       </button>

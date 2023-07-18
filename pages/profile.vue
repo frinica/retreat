@@ -15,28 +15,28 @@ interface Track {
 }
 
 const store = useAuthStore()
-//const token = store.getToken
-const token = store.$state.token
+const token = store.getToken
 const audioTracks = useAudioTracks()
 const audioPlaying = ref(false)
 const audio: any = ref(null)
+const currentTrack = ref<string | null>(null)
 
-// Get the users saved audio tracks
-const listEntries = await useFetch(`/api/lists/${token?.id}`, {
+const listEntries = <FavTrack[]>await useFetch(`/api/lists/${token?.id}`, {
   method: "get",
   headers: { "Content-Type": "application/json" },
-})
+}).then((response) => response.data)
 
 // Get audio tracks from composables
 const getAudioTrack = (savedTrack: FavTrack) => {
   return audioTracks.find((t: Track) => t.id === savedTrack.sound_id)
 }
 
-const playSound = (track: Track) => {
+const playSound = (track: Track | undefined) => {
   if (!audioPlaying.value) {
-    audio.value = new Audio(track.src)
+    audio.value = new Audio(track?.src)
     audio.value.play()
     audioPlaying.value = true
+    currentTrack.value = track?.id || "no track"
   }
 }
 
@@ -44,6 +44,7 @@ const pauseSound = () => {
   if (audioPlaying.value) {
     audio.value.pause()
     audioPlaying.value = false
+    currentTrack.value = null
   }
 }
 
@@ -65,11 +66,27 @@ const deleteFav = async (track: FavTrack) => {
 </script>
 
 <template>
-  <h2 v-if="token?.name">Hello {{ token?.name }}!</h2>
-  <h2 v-else>Hello!</h2>
-  <div v-for="entry in listEntries.data.value">
-    <button @click="playSound(getAudioTrack(entry))">Play!</button>
-    <button @click="pauseSound">Pause!</button>
-    <button @click="deleteFav(entry)">Remove from favs!</button>
-  </div>
+  <section class="h-screen bg-green-dark m-2 p-2 bg-opacity-40 rounded-lg">
+    <h2 class="font-serif text-3xl text-center mb-8 mt-4">My Favourites</h2>
+    <div v-for="entry in listEntries" class="relative">
+      <AudioPlayerBg :type="entry.sound_type" />
+      <div class="absolute flex justify-between top-10 left-5 min-w-[288px]">
+        <button
+          v-if="currentTrack !== entry.sound_id"
+          @click="playSound(getAudioTrack(entry))"
+        >
+          <PlayButton />
+        </button>
+        <button v-if="currentTrack === entry.sound_id" @click="pauseSound">
+          <PauseButton />
+        </button>
+        <h2 class="capitalize flex-1 px-4 self-center drop-shadow-lg">
+          {{ entry.sound_id }}
+        </h2>
+        <button @click="deleteFav(entry)">
+          <HeartFilled />
+        </button>
+      </div>
+    </div>
+  </section>
 </template>
