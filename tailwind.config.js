@@ -64,6 +64,9 @@ module.exports = {
         "tropical-img": "url('~/assets/images/tropical.jpg')",
         "underwater-img": "url('~/assets/images/underwater.jpg')",
       },
+      boxShadow: {
+        custom: "0 0 5px 10px #1B3817",
+      },
     },
   },
   plugins: [],

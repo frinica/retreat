@@ -7,7 +7,7 @@ interface UserData {
 }
 interface RegError {
   code: string
-  message: string
+  message: String
 }
 
 const user = ref({
@@ -40,8 +40,8 @@ const register = async () => {
       body: { email, password, name, role },
     }).then((response) => response.data)
 
-    if (res?.value?.hasOwnProperty("message")) {
-      return (errorMsg.value = res.value.message)
+    if (res.value && "message" in res.value) {
+      return (errorMsg.value = res.value.message as string)
     } else {
       location.reload()
     }
