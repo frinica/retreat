@@ -25,9 +25,11 @@ const login = async () => {
     <div
       class="bg-green-dark bg-opacity-50 mx-10 px-8 py-10 rounded-lg shadow-lg"
     >
-      <h1 class="text-7xl mb-16 text-white drop-shadow-lg font-serif">
-        Retreat
-      </h1>
+      <transition appear name="fade">
+        <h1 class="text-7xl mb-16 text-white drop-shadow-lg font-serif">
+          Retreat
+        </h1>
+      </transition>
 
       <form v-if="!showRegForm" @submit.prevent="login" class="flex flex-col">
         <input
@@ -67,3 +69,18 @@ const login = async () => {
     </div>
   </section>
 </template>
+
+<style>
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: opacity 3s ease;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-leave-active {
+  transition: opacity 3s ease;
+}
+</style>
