@@ -26,11 +26,11 @@ const typeColour = computed(() => {
 <template>
   <div
     :class="typeBgImage"
-    class="mb-5 py-6 px-3 rounded-lg h-28 bg-cover bg-bottom shadow-lg"
+    class="mb-5 py-6 px-3 rounded-lg h-28 bg-cover bg-bottom shadow-lg md:h-32 md:grid"
   >
     <div
       :class="typeColour"
-      class="h-full bg-opacity-50 p-2 rounded-lg shadow-md"
+      class="h-full bg-opacity-50 p-2 rounded-lg shadow-md md:w-3/5 md:justify-self-center"
     ></div>
   </div>
 </template>

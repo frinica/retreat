@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gradient-to-b from-gray to-green-darker">
     <Navbar />
-    <main class="h-full font-sans text-white pb-10">
+    <main class="h-full font-sans text-white pb-10 md:grid">
       <slot />
     </main>
     <!-- <footer>

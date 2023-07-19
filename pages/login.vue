@@ -21,9 +21,11 @@ const login = async () => {
 </script>
 
 <template>
-  <section class="text-center bg-hero-pattern py-20 bg-cover h-screen">
+  <section
+    class="text-center bg-hero-pattern py-20 bg-cover h-screen md:flex md:justify-center"
+  >
     <div
-      class="bg-green-dark bg-opacity-50 mx-10 px-8 py-10 rounded-lg shadow-lg"
+      class="bg-green-dark bg-opacity-50 mx-10 px-8 py-12 rounded-lg shadow-lg md:w-1/3 md:h-3/5 md:grid md:place-content-center"
     >
       <transition appear name="fade">
         <h1 class="text-7xl mb-16 text-white drop-shadow-lg font-serif">
@@ -31,7 +33,11 @@ const login = async () => {
         </h1>
       </transition>
 
-      <form v-if="!showRegForm" @submit.prevent="login" class="flex flex-col">
+      <form
+        v-if="!showRegForm"
+        @submit.prevent="login"
+        class="flex flex-col md:w-[800px]"
+      >
         <input
           v-model="user.email"
           type="text"
@@ -46,7 +52,7 @@ const login = async () => {
           name="password"
           placeholder="Password"
           required
-          class="border border-green rounded-lg px-2 py-1 mb-8 drop-shadow-lg opacity-80 focus:outline-green md:self-center md:w-[33%] text-gray"
+          class="border border-green rounded-lg px-2 py-1 mb-8 drop-shadow-lg opacity-80 focus:outline-green md:self-center md:w-[33%] text-gray md:mb-12"
         />
         <div class="text-center">
           <button
