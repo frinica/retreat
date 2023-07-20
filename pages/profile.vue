@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 import { useAuthStore } from "../store/auth"
+definePageMeta({
+  middleware: "auth",
+})
 const store = useAuthStore()
 const token = store.getToken
 </script>
