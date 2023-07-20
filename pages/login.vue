@@ -25,7 +25,7 @@ const login = async () => {
     class="text-center bg-hero-pattern py-20 bg-cover h-screen md:flex md:justify-center"
   >
     <div
-      class="bg-green-dark bg-opacity-50 mx-10 px-8 py-12 rounded-lg shadow-lg md:w-1/3 md:h-3/5 md:grid md:place-content-center"
+      class="bg-green-dark bg-opacity-50 mx-10 px-8 py-12 rounded-lg shadow-lg md:w-1/3 md:h-fit md:grid md:place-content-center"
     >
       <transition appear name="fade">
         <h1 class="text-7xl mb-16 text-white drop-shadow-lg font-serif">
@@ -62,16 +62,18 @@ const login = async () => {
           </button>
         </div>
       </form>
-      <p v-if="!showRegForm" class="mt-5">
-        or
-        <button
-          @click="showRegForm = true"
-          class="underline hover:font-semibold"
-        >
-          Sign up
-        </button>
-      </p>
-      <RegisterForm v-if="showRegForm" />
+      <div>
+        <p v-if="!showRegForm" class="mt-5">
+          or
+          <button
+            @click="showRegForm = true"
+            class="underline hover:font-semibold"
+          >
+            Sign up
+          </button>
+        </p>
+        <RegisterForm v-if="showRegForm" />
+      </div>
     </div>
   </section>
 </template>

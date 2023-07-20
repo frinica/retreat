@@ -50,14 +50,14 @@ const register = async () => {
 </script>
 
 <template>
-  <form @submit.prevent="register" class="flex flex-col">
+  <form @submit.prevent="register" class="flex flex-col md:w-[800px]">
     <input
       v-model="user.name"
       type="text"
       name="name"
       placeholder="Name or Username"
       required
-      class="border border-green rounded-lg px-2 py-1 mb-4 drop-shadow-lg opacity-80 focus:outline-green md:self-center md:w-[33%] text-gray"
+      class="border border-green rounded-lg px-2 py-1 mb-4 drop-shadow-lg opacity-80 focus:outline-green md:self-center md:w-[33%] text-gray md:self-center"
     />
     <input
       v-model="user.email"
@@ -87,7 +87,7 @@ const register = async () => {
       {{ errorMsg }}
     </p>
     <button
-      class="text-white bg-green py-2 px-6 rounded-xl border border-green-light drop-shadow-lg shadow-inner hover:bg-green-dark hover:border-green w-[50%] self-center"
+      class="text-white bg-green py-2 px-6 rounded-xl border border-green-light drop-shadow-lg shadow-inner hover:bg-green-dark hover:border-green w-1/2 self-center md:w-1/6"
     >
       Sign up
     </button>

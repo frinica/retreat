@@ -71,11 +71,12 @@ const deleteFav = async (track: FavTrack) => {
 </script>
 
 <template>
-  <div v-for="entry in listEntries" class="relative text-lg">
+  <div
+    v-for="entry in listEntries"
+    class="relative text-lg font-semibold h-fit w-full mb-6 shadow-lg"
+  >
     <AudioPlayerBg :type="entry.sound_type" />
-    <div
-      class="absolute flex justify-between top-10 left-5 min-w-[272px] md:w-[56%] md:top-12 md:left-44"
-    >
+    <div class="absolute flex justify-between top-[38%] left-[10%] w-4/5">
       <button
         v-if="currentTrack !== entry.sound_id"
         @click="playSound(getAudioTrack(entry))"
