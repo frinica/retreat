@@ -71,29 +71,26 @@ const deleteFav = async (track: FavTrack) => {
 </script>
 
 <template>
-  <section
-    class="h-screen bg-black mx-2 my-4 p-4 bg-opacity-40 rounded-lg shadow-md"
-  >
-    <h2 class="font-serif text-3xl text-center mb-8 mt-4">My Favourites</h2>
-    <div v-for="entry in listEntries" class="relative">
-      <AudioPlayerBg :type="entry.sound_type" />
-      <div class="absolute flex justify-between top-10 left-5 min-w-[272px]">
-        <button
-          v-if="currentTrack !== entry.sound_id"
-          @click="playSound(getAudioTrack(entry))"
-        >
-          <PlayButton />
-        </button>
-        <button v-if="currentTrack === entry.sound_id" @click="pauseSound">
-          <PauseButton />
-        </button>
-        <h2 class="capitalize flex-1 px-4 self-center drop-shadow-lg">
-          {{ entry.sound_id }}
-        </h2>
-        <button @click="deleteFav(entry)">
-          <HeartFilled />
-        </button>
-      </div>
+  <div v-for="entry in listEntries" class="relative text-lg">
+    <AudioPlayerBg :type="entry.sound_type" />
+    <div
+      class="absolute flex justify-between top-10 left-5 min-w-[272px] md:w-[56%] md:top-12 md:left-44"
+    >
+      <button
+        v-if="currentTrack !== entry.sound_id"
+        @click="playSound(getAudioTrack(entry))"
+      >
+        <PlayButton />
+      </button>
+      <button v-if="currentTrack === entry.sound_id" @click="pauseSound">
+        <PauseButton />
+      </button>
+      <h2 class="capitalize flex-1 px-4 self-center drop-shadow-lg">
+        {{ entry.sound_id }}
+      </h2>
+      <button @click="deleteFav(entry)">
+        <HeartFilled />
+      </button>
     </div>
-  </section>
+  </div>
 </template>
