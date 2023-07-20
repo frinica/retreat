@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref } from "vue"
 import { useAuthStore } from "../store/auth"
 
 interface Track {
@@ -8,6 +7,7 @@ interface Track {
   src: string
 }
 
+const emit = defineEmits(["trackType"])
 const store = useAuthStore()
 const token = store.getToken
 const audioTracks = useAudioTracks()
@@ -32,11 +32,18 @@ const isFavouriteTrack = (track: Track) => {
   }
 }
 
+// Emit the type to change background
+const emitTrackType = (type: string | null) => {
+  emit("trackType", type)
+}
+
 const playSound = (track: Track) => {
-  const { src, id } = track
+  const { src, id, type } = track
+
   if (!audioPlaying.value) {
     audio.value = new Audio(src)
     audio.value.play()
+    emitTrackType(type)
     audioPlaying.value = true
     currentTrack.value = id
   }
@@ -45,6 +52,7 @@ const playSound = (track: Track) => {
 const pauseSound = () => {
   if (audioPlaying.value && audio.value) {
     audio.value.pause()
+    emitTrackType(null)
     audioPlaying.value = false
     currentTrack.value = null
   }

@@ -1,16 +1,24 @@
 <script lang="ts" setup>
 import { storeToRefs } from "pinia"
 import { useAuthStore } from "../store/auth"
+import { useBackgroundStore } from "~/store/background"
 import { useRouter } from "vue-router"
 
 const { authenticated } = storeToRefs(useAuthStore())
 const { logoutUser } = useAuthStore()
 const router = useRouter()
 const showMenu = ref(false)
+const bgStore = useBackgroundStore()
+const bgType = computed(() => bgStore.getBackground)
+const bgStyle = ref<string>("bg-green-dark")
 
-const toggleNav = () => {
-  showMenu.value = !showMenu.value
-}
+watch(bgType, (newValue) => {
+  if (!newValue) {
+    bgStyle.value = "bg-green-dark"
+  } else if (newValue) {
+    bgStyle.value = `bg-${newValue}`
+  }
+})
 
 const logout = () => {
   logoutUser()
@@ -19,11 +27,8 @@ const logout = () => {
 </script>
 
 <template>
-  <header
-    v-if="authenticated"
-    class="bg-green-dark text-white p-2 shadow-custom md:p-6"
-  >
-    <nav class="relative">
+  <header v-if="authenticated">
+    <nav :class="[bgStyle]" class="relative text-white p-2 md:p-6">
       <div class="flex justify-between">
         <div class="w-8"></div>
         <h1 class="font-serif text-3xl md:text-5xl">
@@ -61,7 +66,7 @@ const logout = () => {
       <transition name="slide-fade">
         <ul
           v-if="showMenu"
-          class="absolute right-0 bg-gradient-to-b from-black to-green-dark flex flex-col gap-4 text-end p-4 z-10 mt-4 -mr-2 w-1/2 h-screen shadow-lg rounded-b-lg md:mt-8 md:text-lg md:font-semibold md:gap-10 md:w-1/4 md:-m-6 md:p-8"
+          class="absolute right-0 bg-gradient-to-b from-black to-green-dark flex flex-col gap-4 text-end p-4 z-10 mt-2 -mr-2 w-1/2 h-screen shadow-lg rounded-b-lg md:mt-8 md:text-lg md:font-semibold md:gap-10 md:w-1/4 md:-m-6 md:p-8"
         >
           <li @click="showMenu = false">
             <nuxt-link
