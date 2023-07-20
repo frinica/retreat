@@ -20,6 +20,8 @@ watch(bgType, (newValue) => {
     <main class="h-full font-sans text-white pb-10 md:grid">
       <slot />
     </main>
-    <footer></footer>
+    <footer class="text-white">
+      <Footer />
+    </footer>
   </div>
 </template>
